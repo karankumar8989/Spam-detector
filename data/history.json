@@ -1,0 +1,9 @@
+[
+  {
+    "timestamp": "2026-04-09T10:31:33.594438Z",
+    "message": "Hey,You Won 50000",
+    "label": "ham",
+    "confidence": 1.0,
+    "spam_probability": 0.0
+  }
+]

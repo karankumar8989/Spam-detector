@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SpamSentry AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" />
+</head>
+<body>
+    <div class="background-orb orb-1"></div>
+    <div class="background-orb orb-2"></div>
+
+    <header class="topbar glass">
+        <div class="brand">
+            <div class="brand-badge">S</div>
+            <div>
+                <h1>SpamSentry AI</h1>
+                <p>ML + AI Message Intelligence</p>
+            </div>
+        </div>
+        <button id="themeToggle" class="btn btn-secondary" aria-label="Toggle dark mode">Toggle Theme</button>
+    </header>
+
+    <main class="layout">
+        <section class="card glass">
+            <h2>Smart Spam Detection</h2>
+            <p class="muted">Paste any message and get prediction, confidence, suspicious terms, and rewrite suggestions.</p>
+            <textarea id="messageInput" placeholder="Type or paste your message here..."></textarea>
+            <div class="actions">
+                <button id="predictBtn" class="btn btn-primary">Analyze Message</button>
+                <span id="loading" class="loading hidden"></span>
+            </div>
+            <div id="predictError" class="error hidden"></div>
+        </section>
+
+        <section class="card glass result-card hidden" id="resultCard">
+            <h2>Prediction Result</h2>
+            <div class="result-grid">
+                <div>
+                    <p class="label">Prediction</p>
+                    <p id="resultLabel" class="value">-</p>
+                </div>
+                <div>
+                    <p class="label">Confidence</p>
+                    <p id="resultConfidence" class="value">-</p>
+                </div>
+            </div>
+            <p class="label">Highlighted Text</p>
+            <div id="highlightedText" class="highlight-box"></div>
+
+            <p class="label">AI Suggestion</p>
+            <div id="suggestionText" class="suggestion-box"></div>
+
+            <p class="label">Explanation</p>
+            <div id="explanationText" class="suggestion-box"></div>
+        </section>
+
+        <section class="card glass">
+            <h2>AI Assistant</h2>
+            <p class="muted">Ask: "Why is this spam?" or "How can I make this safer?"</p>
+            <div class="chat-row">
+                <input id="chatInput" type="text" placeholder="Ask about the current prediction..." />
+                <button id="chatBtn" class="btn btn-primary">Ask</button>
+            </div>
+            <div id="chatOutput" class="chat-output">Assistant answers will appear here.</div>
+        </section>
+
+        <section class="card glass">
+            <h2>Bulk CSV Detection</h2>
+            <p class="muted">Upload a CSV with column: <code>message</code>, <code>text</code>, or <code>content</code>.</p>
+            <div class="chat-row">
+                <input id="csvFile" type="file" accept=".csv" />
+                <button id="bulkBtn" class="btn btn-secondary">Upload & Download Results</button>
+            </div>
+            <div id="bulkStatus" class="muted"></div>
+        </section>
+
+        <section class="card glass analytics">
+            <h2>Analytics Dashboard</h2>
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <p>Total Checked</p>
+                    <h3 id="totalChecked">0</h3>
+                </div>
+                <div class="stat-box">
+                    <p>Model Accuracy</p>
+                    <h3 id="modelAccuracy">0%</h3>
+                </div>
+                <div class="stat-box">
+                    <p>Average Confidence</p>
+                    <h3 id="avgConfidence">0%</h3>
+                </div>
+            </div>
+            <canvas id="ratioChart" height="120"></canvas>
+        </section>
+
+        <section class="card glass">
+            <h2>Recent History</h2>
+            <div id="historyList" class="history-list"></div>
+        </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
